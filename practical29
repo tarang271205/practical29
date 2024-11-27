@@ -1,0 +1,45 @@
+Program: 29 Write a C program using a character string in a block of memory space created by 
+calloc () and then modify the same to store a larger string using realloc () function. 
+(Dynamic Array). 
+Code: #include <stdio.h> 
+#include <stdlib.h> 
+#include <string.h> 
+ 
+int main() { 
+    char *str; 
+ 
+    // Step 1: Allocate initial memory using calloc 
+    str = (char *)calloc(20, sizeof(char)); // Allocate space for 20 characters 
+    if (str == NULL) { 
+        printf("Memory allocation failed!\n"); 
+        return 1; 
+    } 
+ 
+    // Step 2: Store a string in the allocated memory 
+    printf("Enter a string (up to 19 characters): "); 
+    fgets(str, 20, stdin); 
+    str[strcspn(str, "\n")] = '\0'; // Remove trailing newline 
+ 
+    printf("\nStored String: %s\n", str); 
+ 
+    // Step 3: Reallocate memory to store a larger string 
+    str = (char *)realloc(str, 50 * sizeof(char)); // Expand memory to 50 characters 
+    if (str == NULL) { 
+        printf("Memory reallocation failed!\n"); 
+        return 1; 
+ 
+ 
+    } 
+ 
+    // Step 4: Append a larger string 
+    printf("Enter a larger string to append (up to 49 characters): "); 
+    fgets(str + strlen(str), 50 - strlen(str), stdin); // Append to existing string 
+    str[strcspn(str, "\n")] = '\0'; // Remove trailing newline 
+ 
+    printf("\nUpdated String: %s\n", str); 
+ 
+    // Free allocated memory 
+    free(str);
+    printf("\n\n24ce032_TARANG");
+       return 0; 
+} 
